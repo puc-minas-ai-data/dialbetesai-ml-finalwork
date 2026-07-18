@@ -58,7 +58,7 @@ def health():
 @app.post("/predict", response_model=PredictionOutput)
 def predict(dados: DiabetesInput):
     entrada = pd.DataFrame([dados.model_dump()])[features]
-    entrada_sc = scaler.transform(entrada)
+    entrada_sc = pd.DataFrame(scaler.transform(entrada), columns=features)
 
     outcome = int(modelo.predict(entrada_sc)[0])
     probability = float(modelo.predict_proba(entrada_sc)[0, 1])
