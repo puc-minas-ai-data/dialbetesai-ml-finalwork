@@ -1,0 +1,156 @@
+#hero {
+  padding: 48px 32px 32px;
+  border-bottom: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+  }
+}
+
+#hero p {
+  max-width: 640px;
+  margin: 12px auto 0;
+}
+
+.disclaimer {
+  margin-top: 16px !important;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+#content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px;
+
+  @media (max-width: 1024px) {
+    padding: 24px 20px;
+  }
+}
+
+.diabetes-form {
+  text-align: left;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.form-field small {
+  color: var(--text);
+}
+
+.form-field input {
+  font: inherit;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+}
+
+.submit-button {
+  margin-top: 24px;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  color: var(--accent);
+  background: var(--accent-bg);
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent-border);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.result-card {
+  padding: 20px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.result-placeholder,
+.result-loading {
+  color: var(--text);
+}
+
+.result-error {
+  border-color: var(--risk-high);
+  background: var(--risk-high-bg);
+  color: var(--text-h);
+}
+
+.risk-baixo {
+  border-color: var(--risk-low);
+  background: var(--risk-low-bg);
+}
+.risk-moderado {
+  border-color: var(--risk-mid);
+  background: var(--risk-mid-bg);
+}
+.risk-alto {
+  border-color: var(--risk-high);
+  background: var(--risk-high-bg);
+}
+
+.risk-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.risk-baixo .risk-badge {
+  color: var(--risk-low);
+  background: var(--risk-low-bg);
+}
+.risk-moderado .risk-badge {
+  color: var(--risk-mid);
+  background: var(--risk-mid-bg);
+}
+.risk-alto .risk-badge {
+  color: var(--risk-high);
+  background: var(--risk-high-bg);
+}
+
+.result-label {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-h);
+  margin: 0 0 4px;
+}
+
+.result-probability {
+  color: var(--text);
+}
