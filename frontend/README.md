@@ -1,16 +1,50 @@
-# React + Vite
+# DiabetesAI — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interface web (React + Vite) para preencher os dados clínicos de um paciente e visualizar o risco de diabetes estimado pela API do backend.
 
-Currently, two official plugins are available:
+## Estrutura
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+src/
+  api.js                          chamada HTTP para a API (POST /predict)
+  components/
+    DiabetesForm.jsx              formulário com os 8 campos numéricos
+    PredictionResult.jsx          cartão de resultado (probabilidade + nível de risco)
+  App.jsx                         página principal
+  App.css / index.css             estilos e variáveis de tema (claro/escuro)
+```
 
-## React Compiler
+## Pré-requisitos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [Node.js](https://nodejs.org/) 18+
+- Backend rodando em `http://localhost:8000` (ver `backend/README.md`)
 
-## Expanding the Oxlint configuration
+## Como executar
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+npm install
+npm run dev
+```
+
+Sobe em `http://localhost:5173`.
+
+## Configuração
+
+A URL da API é lida de `VITE_API_URL` (arquivo `.env`, já presente no projeto):
+
+```
+VITE_API_URL=http://localhost:8000
+```
+
+## Fluxo
+
+1. `DiabetesForm` valida os campos (`required`, `min`/`max` espelhando os limites da API) e envia os dados para `predictDiabetes` (`src/api.js`).
+2. `App.jsx` guarda o estado da requisição (`idle` / `loading` / `success` / `error`) e passa para `PredictionResult`.
+3. `PredictionResult` exibe a probabilidade estimada e um selo de risco (baixo/moderado/alto, com cores próprias em `App.css`) ou uma mensagem de erro amigável, caso a API rejeite os dados ou esteja fora do ar.
+
+## Scripts disponíveis
+
+- `npm run dev` — servidor de desenvolvimento com hot-reload
+- `npm run build` — build de produção (`dist/`)
+- `npm run preview` — serve o build de produção localmente
+- `npm run lint` — lint com Oxlint
